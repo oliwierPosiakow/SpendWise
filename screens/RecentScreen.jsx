@@ -1,9 +1,10 @@
 import React from 'react';
 import {Text} from "react-native";
+import ExpensesOverview from "../components/Expenses/ExpensesOverview";
 
 function RecentScreen(props) {
     return (
-        <Text>Recent</Text>
+        <ExpensesOverview period={'Last 7 Days'}/>
     );
 }
 

@@ -10,6 +10,7 @@ import ManageScreen from "./screens/ManageScreen";
 import RecentScreen from "./screens/RecentScreen";
 import AllScreen from "./screens/AllScreen";
 import {COLORS} from "./constants/COLORS";
+import IconButton from "./UI/IconButton";
 
 const Stack = createNativeStackNavigator()
 const Tabs = createBottomTabNavigator()
@@ -21,6 +22,7 @@ function ExpensesOverview(){
             headerTintColor: COLORS.secondary,
             tabBarStyle: {backgroundColor: COLORS.primary},
             tabBarActiveTintColor: COLORS.accent2,
+            headerRight: ({tintColor}) => <IconButton name={'add-to-list'} size={30} color={tintColor} onPress={() => {}}/>,
         }} >
             <Tabs.Screen name={'RecentScreen'} component={RecentScreen} options={{
                 title: 'Recent Expenses',
@@ -38,7 +40,7 @@ function ExpensesOverview(){
 export default function App() {
     return (
         <>
-            <StatusBar style="auto" />
+            <StatusBar style="light" />
             <NavigationContainer>
                 <Stack.Navigator>
                     <Stack.Screen name={"ExpensesOverview"} component={ExpensesOverview} options={{headerShown:false}}/>
