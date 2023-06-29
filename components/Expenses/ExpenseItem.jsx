@@ -2,9 +2,13 @@ import React from 'react';
 import {View, Pressable, Text, StyleSheet} from "react-native";
 import {COLORS} from "../../constants/COLORS";
 import {getFormattedDate} from "../../util/date";
-function ExpenseItem({desc, amount, date}) {
+import {useNavigation} from "@react-navigation/native";
+function ExpenseItem({id, desc, amount, date}) {
+    const navigator = useNavigation()
     function expenseHandler() {
-
+        navigator.navigate('ManageScreen', {
+            expenseId: id,
+        })
     }
     return (
         <Pressable onPress={expenseHandler} style={({pressed}) => pressed && styles.pressed}>

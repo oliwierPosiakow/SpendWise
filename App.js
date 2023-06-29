@@ -17,13 +17,20 @@ const Tabs = createBottomTabNavigator()
 
 function ExpensesOverview(){
     return (
-        <Tabs.Navigator screenOptions={{
+        <Tabs.Navigator screenOptions={({navigation}) => ({
             headerStyle: {backgroundColor: COLORS.primary},
             headerTintColor: COLORS.secondary,
             tabBarStyle: {backgroundColor: COLORS.primary},
             tabBarActiveTintColor: COLORS.accent2,
-            headerRight: ({tintColor}) => <IconButton name={'add-to-list'} size={30} color={tintColor} onPress={() => {}}/>,
-        }} >
+            headerRight: ({tintColor}) => (
+                <IconButton
+                    name={'add-to-list'}
+                    size={30}
+                    color={tintColor}
+                    onPress={() => {navigation.navigate('ManageScreen')}}
+                />
+            ),
+        })} >
             <Tabs.Screen name={'RecentScreen'} component={RecentScreen} options={{
                 title: 'Recent Expenses',
                 tabBarLabel: 'Recent',
@@ -42,9 +49,14 @@ export default function App() {
         <>
             <StatusBar style="light" />
             <NavigationContainer>
-                <Stack.Navigator>
+                <Stack.Navigator screenOptions={{
+                    headerStyle: {backgroundColor: COLORS.primary},
+                    headerTintColor: COLORS.secondary
+                }}>
                     <Stack.Screen name={"ExpensesOverview"} component={ExpensesOverview} options={{headerShown:false}}/>
-                    <Stack.Screen name={"ManageScreen"} component={ManageScreen}/>
+                    <Stack.Screen name={"ManageScreen"} component={ManageScreen} options={{
+                        presentation: 'modal',
+                    }}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </>
