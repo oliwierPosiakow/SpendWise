@@ -3,38 +3,17 @@ import {View, StyleSheet} from "react-native";
 import ExpensesSummary from "./ExpensesSummary";
 import ExpensesList from "./ExpensesList";
 import {COLORS} from "../../constants/COLORS";
+import {dummy} from "../../constants/DUMMY";
+import {useSelector} from "react-redux";
 
-const dummy = [
-    {
-        id: 1,
-        amount: 12.49,
-        desc: 'McDonalds',
-        date: new Date('2021-12-22')
-    },
-    {
-        id: 2,
-        amount: 105.49,
-        desc: 'Koszulka Nike',
-        date: new Date('2021-12-25')
-    },
-    {
-        id: 3,
-        amount: 5.49,
-        desc: 'Coca-Cola',
-        date: new Date('2021-12-25')
-    },
-    {
-        id: 4,
-        amount: 35.49,
-        desc: 'Obiad',
-        date: new Date('2022-01-17')
-    },
-]
 function ExpensesOverview({expenses, period}) {
+
+    const expensesStore = useSelector(state => state.expenses.expenses)
+
     return (
         <View style={styles.expensesContainer}>
-            <ExpensesSummary expenses={dummy} periodName={period}/>
-            <ExpensesList expenses={dummy}/>
+            <ExpensesSummary expenses={expensesStore} periodName={period}/>
+            <ExpensesList expenses={expensesStore}/>
         </View>
     );
 }

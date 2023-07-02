@@ -12,6 +12,9 @@ import AllScreen from "./screens/AllScreen";
 import {COLORS} from "./constants/COLORS";
 import IconButton from "./UI/IconButton";
 
+import {Provider} from "react-redux";
+import {store} from "./redux/store";
+
 const Stack = createNativeStackNavigator()
 const Tabs = createBottomTabNavigator()
 
@@ -48,17 +51,19 @@ export default function App() {
     return (
         <>
             <StatusBar style="light" />
-            <NavigationContainer>
-                <Stack.Navigator screenOptions={{
-                    headerStyle: {backgroundColor: COLORS.primary},
-                    headerTintColor: COLORS.secondary
-                }}>
-                    <Stack.Screen name={"ExpensesOverview"} component={ExpensesOverview} options={{headerShown:false}}/>
-                    <Stack.Screen name={"ManageScreen"} component={ManageScreen} options={{
-                        presentation: 'modal',
-                    }}/>
-                </Stack.Navigator>
-            </NavigationContainer>
+            <Provider store={store}>
+                <NavigationContainer>
+                    <Stack.Navigator screenOptions={{
+                        headerStyle: {backgroundColor: COLORS.primary},
+                        headerTintColor: COLORS.secondary
+                    }}>
+                        <Stack.Screen name={"ExpensesOverview"} component={ExpensesOverview} options={{headerShown:false}}/>
+                        <Stack.Screen name={"ManageScreen"} component={ManageScreen} options={{
+                            presentation: 'modal',
+                        }}/>
+                    </Stack.Navigator>
+                </NavigationContainer>
+            </Provider>
         </>
     );
 }

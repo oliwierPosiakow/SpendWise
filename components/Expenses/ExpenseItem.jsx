@@ -15,7 +15,7 @@ function ExpenseItem({id, desc, amount, date}) {
             <View style={styles.buttonWrapper}>
                 <View style={styles.descDateContainer}>
                     <Text style={styles.itemDesc}>{desc}</Text>
-                    <Text style={styles.itemDate}>{getFormattedDate(date)}</Text>
+                    <Text style={styles.itemDate}>{date}</Text>
                 </View>
                 <View>
                     <Text style={styles.itemAmount}>${amount.toFixed(2)}</Text>

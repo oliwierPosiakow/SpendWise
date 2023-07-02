@@ -3,11 +3,16 @@ import {Text, View, StyleSheet} from "react-native";
 import IconButton from "../UI/IconButton";
 import {COLORS} from "../constants/COLORS";
 import Button from "../UI/Button";
+import {useDispatch} from "react-redux";
+import {addExpense, removeExpense, updateExpense} from "../redux/expenses";
+import {getFormattedDate} from "../util/date";
 
 function ManageScreen({route, navigation}) {
 
     const expenseId = route.params?.expenseId
     const isEditing = !!expenseId
+
+    const dispatch = useDispatch()
 
     useLayoutEffect(() => {
         navigation.setOptions({
@@ -16,9 +21,18 @@ function ManageScreen({route, navigation}) {
     },[navigation, isEditing])
 
     function deleteExpense() {
+        dispatch(removeExpense({id: expenseId}))
         navigation.goBack()
     }
-    function addExpense(){
+    function addExpenseHandler(){
+        dispatch(addExpense(
+            {
+                id: 20,
+                amount: 12.49,
+                desc: 'McDonalds',
+                date: getFormattedDate(new Date('2022-01-23')).toString()
+            }
+        ))
         navigation.goBack()
     }
     function cancelHandler(){
@@ -27,9 +41,10 @@ function ManageScreen({route, navigation}) {
 
     return (
         <View style={styles.manageContainer}>
+            <Text>{expenseId}</Text>
             <View style={styles.buttonWrapper}>
                 <Button mode={'flat'} onPress={cancelHandler} style={styles.btn}>Cancel</Button>
-                <Button onPress={addExpense} style={styles.btn}>{isEditing ? 'Update' : 'Add'}</Button>
+                <Button onPress={addExpenseHandler} style={styles.btn}>{isEditing ? 'Update' : 'Add'}</Button>
             </View>
             {isEditing && (
                 <View style={styles.deleteBtn}>
