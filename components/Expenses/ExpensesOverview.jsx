@@ -12,8 +12,8 @@ function ExpensesOverview({expenses, period}) {
 
     return (
         <View style={styles.expensesContainer}>
-            <ExpensesSummary expenses={expensesStore} periodName={period}/>
-            <ExpensesList expenses={expensesStore}/>
+            <ExpensesSummary expenses={expenses} periodName={period}/>
+            <ExpensesList expenses={expenses}/>
         </View>
     );
 }

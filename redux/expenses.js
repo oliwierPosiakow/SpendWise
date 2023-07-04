@@ -1,6 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
 import {dummy} from "../constants/DUMMY";
-import {getFormattedDate} from "../util/date";
 
 const expensesSlice = createSlice({
     name: 'expenses',
@@ -10,11 +9,11 @@ const expensesSlice = createSlice({
     reducers: {
         //adding object
         addExpense: (state, action) => {
-            state.expenses.push({
-                id: action.payload.id,
-                amount: action.payload.amount,
-                desc: action.payload.desc,
-                date: action.payload.date
+            state.expenses.unshift({
+                id: Math.floor((Math.random() * 1000) + 1) + state.expenses.length,
+                amount: action.payload.expenseData.amount,
+                desc: action.payload.expenseData.desc,
+                date: new Date().toString()
             })
         },
         //removing given object by id from an array
@@ -25,7 +24,19 @@ const expensesSlice = createSlice({
             state.expenses.splice(state.expenses.indexOf(expense[0]), 1)
         },
         //updating object by passing in parameters
-        updateExpense: (state, action) => {},
+        updateExpense: (state, action) => {
+            //find an index to update
+            const updateItemIndex = state.expenses.findIndex((expense) => expense.id === action.payload.id)
+            //get the expense from given index
+            const updateExpense = state.expenses[updateItemIndex]
+            //new, updated expense
+            const newUpdateExpense = {...updateExpense, ...action.payload.expenseData}
+            //new array of expenses
+            const updatedExpenses = [...state.expenses]
+            //setting new expense in new array
+            updatedExpenses[updateItemIndex] = newUpdateExpense
+            return updatedExpenses
+        },
     }
 })
 

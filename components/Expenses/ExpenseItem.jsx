@@ -17,7 +17,7 @@ function ExpenseItem({id, desc, amount, date}) {
                     <Text style={styles.itemDesc}>{desc}</Text>
                     <Text style={styles.itemDate}>{date}</Text>
                 </View>
-                <View>
+                <View style={styles.amountWrapper}>
                     <Text style={styles.itemAmount}>${amount.toFixed(2)}</Text>
                 </View>
             </View>
@@ -50,8 +50,15 @@ const styles = StyleSheet.create({
         color: COLORS.secondary,
         fontWeight: '200',
     },
+    amountWrapper:{
+        backgroundColor: COLORS.background,
+        padding: 10,
+        width: 75,
+        borderRadius: 5,
+    },
     itemAmount:{
-        color: COLORS.accent1
+        color: COLORS.accent1,
+        textAlign: "center",
     },
     pressed:{
         opacity: 0.7

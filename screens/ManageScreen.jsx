@@ -5,7 +5,6 @@ import {COLORS} from "../constants/COLORS";
 import Button from "../UI/Button";
 import {useDispatch} from "react-redux";
 import {addExpense, removeExpense, updateExpense} from "../redux/expenses";
-import {getFormattedDate} from "../util/date";
 
 function ManageScreen({route, navigation}) {
 
@@ -25,12 +24,11 @@ function ManageScreen({route, navigation}) {
         navigation.goBack()
     }
     function addExpenseHandler(){
-        dispatch(addExpense(
-            {
+        dispatch(addExpense({
                 id: 20,
                 amount: 12.49,
                 desc: 'McDonalds',
-                date: getFormattedDate(new Date('2022-01-23')).toString()
+                date: new Date('2022-01-23').toString()
             }
         ))
         navigation.goBack()
