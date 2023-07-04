@@ -8,6 +8,7 @@ const expensesSlice = createSlice({
         expenses: dummy,
     },
     reducers: {
+        //adding object
         addExpense: (state, action) => {
             state.expenses.push({
                 id: action.payload.id,
@@ -16,9 +17,14 @@ const expensesSlice = createSlice({
                 date: action.payload.date
             })
         },
+        //removing given object by id from an array
         removeExpense: (state, action) => {
-            state.expenses.splice(state.expenses.indexOf(action.payload.id)-1, 1)
+            const expense = state.expenses.filter((expense) => {
+                return expense.id === action.payload.id
+            })
+            state.expenses.splice(state.expenses.indexOf(expense[0]), 1)
         },
+        //updating object by passing in parameters
         updateExpense: (state, action) => {},
     }
 })
