@@ -24,13 +24,25 @@ function ManageScreen({route, navigation}) {
         navigation.goBack()
     }
     function addExpenseHandler(){
-        dispatch(addExpense({
-                id: 20,
-                amount: 12.49,
-                desc: 'McDonalds',
-                date: new Date('2022-01-23').toString()
-            }
-        ))
+        if(!isEditing){
+            dispatch(addExpense({
+                expenseData:{
+                    desc: 'Test!!!',
+                    amount: 29.99,
+                }}
+            ))
+        }
+        else{
+            dispatch(updateExpense({
+                id: expenseId,
+                expenseData:{
+                    description: 'Test Update',
+                    amount: 19.99,
+                    date: new Date('2023-07-06').toDateString()
+                }
+            }))
+        }
+
         navigation.goBack()
     }
     function cancelHandler(){

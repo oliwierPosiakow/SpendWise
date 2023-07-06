@@ -11,7 +11,7 @@ export const dummy = [
         id: 2,
         amount: 105.49,
         desc: 'Koszulka Nike',
-        date: new Date('2023-06-29').toDateString()
+        date: new Date('2023-07-05').toDateString()
     },
     {
         id: 3,
