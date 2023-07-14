@@ -35,7 +35,7 @@ const expensesSlice = createSlice({
             const updatedExpenses = [...state.expenses]
             //setting new expense in new array
             updatedExpenses[updateItemIndex] = newUpdateExpense
-            return updatedExpenses
+            state.expenses = updatedExpenses
         },
     }
 })

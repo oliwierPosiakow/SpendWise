@@ -13,7 +13,7 @@ function RecentScreen(props) {
         return Date.parse(expense.date) > Date.parse(date7Days)
     })
     return (
-        <ExpensesOverview period={'Last 7 Days'} expenses={recentExpenses}/>
+        <ExpensesOverview period={'Last 7 Days'} expenses={recentExpenses} fallback={'No recent expenses found.'}/>
     );
 }
 

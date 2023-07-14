@@ -36,13 +36,12 @@ function ManageScreen({route, navigation}) {
             dispatch(updateExpense({
                 id: expenseId,
                 expenseData:{
-                    description: 'Test Update',
+                    desc: 'Test Update',
                     amount: 19.99,
                     date: new Date('2023-07-06').toDateString()
-                }
-            }))
+            }}
+            ))
         }
-
         navigation.goBack()
     }
     function cancelHandler(){
