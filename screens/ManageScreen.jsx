@@ -1,11 +1,12 @@
 import React, {useEffect, useLayoutEffect} from 'react';
-import {Text, View, StyleSheet} from "react-native";
+import {Text, View, StyleSheet, TextInput} from "react-native";
 import IconButton from "../UI/IconButton";
 import {COLORS} from "../constants/COLORS";
 import Button from "../UI/Button";
 import {useDispatch} from "react-redux";
 import {addExpense, removeExpense, updateExpense} from "../redux/expenses";
 
+import ExpenseForm from "../components/Expenses/ExpenseForm";
 function ManageScreen({route, navigation}) {
 
     const expenseId = route.params?.expenseId
@@ -50,7 +51,7 @@ function ManageScreen({route, navigation}) {
 
     return (
         <View style={styles.manageContainer}>
-            <Text>{expenseId}</Text>
+            <ExpenseForm/>
             <View style={styles.buttonWrapper}>
                 <Button mode={'flat'} onPress={cancelHandler} style={styles.btn}>Cancel</Button>
                 <Button onPress={addExpenseHandler} style={styles.btn}>{isEditing ? 'Update' : 'Add'}</Button>
@@ -82,7 +83,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         flexDirection: "row",
         justifyContent: "center",
-        marginVertical: 10,
+        marginVertical: 20,
         gap: 10,
     },
     btn:{
