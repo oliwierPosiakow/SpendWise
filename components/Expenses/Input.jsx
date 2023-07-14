@@ -2,10 +2,10 @@ import React from 'react';
 import {View, Text, TextInput, StyleSheet} from "react-native";
 import {COLORS} from "../../constants/COLORS";
 
-function Input({labelText, inputConfig}) {
+function Input({labelText, inputConfig, style}) {
     const isMultiline = inputConfig.multiline ? true : ''
     return (
-        <View style={styles.inputWrapper}>
+        <View style={[styles.inputWrapper, style]}>
             <Text style={styles.label}>{labelText}</Text>
             <TextInput style={[styles.input, isMultiline ? styles.inputMultiline : '']} {...inputConfig}/>
         </View>

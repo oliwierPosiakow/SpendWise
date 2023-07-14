@@ -24,24 +24,17 @@ function ManageScreen({route, navigation}) {
         dispatch(removeExpense({id: expenseId}))
         navigation.goBack()
     }
-    function addExpenseHandler(){
+    function addExpenseHandler(expenseData){
         if(!isEditing){
             dispatch(addExpense({
-                expenseData:{
-                    desc: 'Test!!!',
-                    amount: 29.99,
-                }}
-            ))
+                expenseData: {...expenseData}
+            }))
         }
         else{
             dispatch(updateExpense({
                 id: expenseId,
-                expenseData:{
-                    desc: 'Test Update',
-                    amount: 19.99,
-                    date: new Date('2023-07-06').toDateString()
-            }}
-            ))
+                expenseData: {...expenseData}
+            }))
         }
         navigation.goBack()
     }
@@ -51,11 +44,7 @@ function ManageScreen({route, navigation}) {
 
     return (
         <View style={styles.manageContainer}>
-            <ExpenseForm/>
-            <View style={styles.buttonWrapper}>
-                <Button mode={'flat'} onPress={cancelHandler} style={styles.btn}>Cancel</Button>
-                <Button onPress={addExpenseHandler} style={styles.btn}>{isEditing ? 'Update' : 'Add'}</Button>
-            </View>
+            <ExpenseForm onSubmit={addExpenseHandler} onCancel={cancelHandler} submitButtonLabel={isEditing? 'Update' : 'Add'}/>
             {isEditing && (
                 <View style={styles.deleteBtn}>
                     <IconButton name={'trash'} color={COLORS.accent2} size={30} onPress={deleteExpense}/>
@@ -79,15 +68,4 @@ const styles = StyleSheet.create({
         borderTopWidth: 5,
         alignItems: "center"
     },
-    buttonWrapper:{
-        alignItems: "center",
-        flexDirection: "row",
-        justifyContent: "center",
-        marginVertical: 20,
-        gap: 10,
-    },
-    btn:{
-        width: 120,
-        marginHorizontal: 10,
-    }
 })

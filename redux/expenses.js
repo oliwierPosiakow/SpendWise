@@ -13,7 +13,7 @@ const expensesSlice = createSlice({
                 id: Math.floor((Math.random() * 1000) + 1) + state.expenses.length,
                 amount: action.payload.expenseData.amount,
                 desc: action.payload.expenseData.desc,
-                date: new Date().toDateString()
+                date: action.payload.expenseData.date
             })
         },
         //removing given object by id from an array
