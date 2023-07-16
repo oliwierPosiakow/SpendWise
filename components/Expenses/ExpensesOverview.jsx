@@ -1,9 +1,8 @@
 import React from 'react';
-import {View, StyleSheet, Text} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import ExpensesSummary from "./ExpensesSummary";
 import ExpensesList from "./ExpensesList";
 import {COLORS} from "../../constants/COLORS";
-import {dummy} from "../../constants/DUMMY";
 import {useSelector} from "react-redux";
 
 function ExpensesOverview({expenses, period, fallback}) {

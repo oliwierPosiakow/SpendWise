@@ -1,5 +1,5 @@
 import React from 'react';
-import {FlatList, View, StyleSheet} from "react-native";
+import {FlatList, StyleSheet, View} from "react-native";
 import ExpenseItem from "./ExpenseItem";
 
 function renderExpense(itemData) {

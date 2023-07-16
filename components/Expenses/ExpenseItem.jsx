@@ -1,8 +1,8 @@
 import React from 'react';
-import {View, Pressable, Text, StyleSheet} from "react-native";
+import {Pressable, StyleSheet, Text, View} from "react-native";
 import {COLORS} from "../../constants/COLORS";
-import {getFormattedDate} from "../../util/date";
 import {useNavigation} from "@react-navigation/native";
+
 function ExpenseItem({id, desc, amount, date}) {
     const navigator = useNavigation()
     function expenseHandler() {

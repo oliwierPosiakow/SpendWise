@@ -1,10 +1,8 @@
-import React from 'react';
-import {View, Text, StyleSheet, Alert} from "react-native";
+import React, {useState} from 'react';
+import {StyleSheet, Text, View} from "react-native";
 import Input from "./Input";
 import {COLORS} from "../../constants/COLORS";
-import {useState} from "react";
 import Button from "../../UI/Button";
-import {is} from "date-fns/locale";
 
 function ExpenseForm({onCancel, onSubmit, submitButtonLabel, defaultValues}) {
     const [formData, setFormData] = useState({

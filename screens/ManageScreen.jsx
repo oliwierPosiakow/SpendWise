@@ -1,15 +1,18 @@
-import React, {useEffect, useLayoutEffect} from 'react';
-import {Text, View, StyleSheet, TextInput} from "react-native";
+import React, {useLayoutEffect, useState} from 'react';
+import {StyleSheet, View} from "react-native";
 import IconButton from "../UI/IconButton";
 import {COLORS} from "../constants/COLORS";
-import Button from "../UI/Button";
 import {useDispatch, useSelector} from "react-redux";
 import {addExpense, removeExpense, updateExpense} from "../redux/expenses";
 
 import ExpenseForm from "../components/Expenses/ExpenseForm";
-import {storeDBExpense, putDBExpense, deleteDBExpense} from "../util/http";
-function ManageScreen({route, navigation}) {
+import {deleteDBExpense, putDBExpense, storeDBExpense} from "../util/http";
+import Loading from "../components/UI/Loading";
+import Error from "../components/UI/Error";
 
+function ManageScreen({route, navigation}) {
+    const [isLoading, setIsLoading] = useState(false)
+    const [error, setError] = useState()
     const expenseId = route.params?.expenseId
     const isEditing = !!expenseId
 
@@ -24,29 +27,54 @@ function ManageScreen({route, navigation}) {
     },[navigation, isEditing])
 
     async function deleteExpense() {
-        dispatch(removeExpense({id: expenseId}))
-        await deleteDBExpense(expenseId)
-        navigation.goBack()
+        setIsLoading(true)
+        try{
+            dispatch(removeExpense({id: expenseId}))
+            await deleteDBExpense(expenseId)
+            navigation.goBack()
+        }
+        catch (e) {
+            setError('Something went wrong.')
+        }
+        setIsLoading(false)
     }
     async function addExpenseHandler(expenseData){
-        if(!isEditing){
-            const id = await storeDBExpense(expenseData)
-            dispatch(addExpense({
-                id: id,
-                expenseData: {...expenseData}
-            }))
+        setIsLoading(true)
+        try{
+            if(!isEditing){
+                const id = await storeDBExpense(expenseData)
+                dispatch(addExpense({
+                    id: id,
+                    expenseData: {...expenseData}
+                }))
+            }
+            else{
+                dispatch(updateExpense({
+                    id: expenseId,
+                    expenseData: {...expenseData}
+                }))
+                await putDBExpense(expenseId,expenseData)
+            }
+            navigation.goBack()
         }
-        else{
-            dispatch(updateExpense({
-                id: expenseId,
-                expenseData: {...expenseData}
-            }))
-            await putDBExpense(expenseId,expenseData)
-        }
-        navigation.goBack()
+       catch (e) {
+           setError('Something went wrong.')
+           setIsLoading(false)
+       }
     }
     function cancelHandler(){
         navigation.goBack()
+    }
+
+    function errorHandler(){
+        setError(null)
+    }
+
+    if(error && !isLoading){
+        return <Error message={error} onConfirm={errorHandler}/>
+    }
+    if(isLoading){
+        return <Loading/>
     }
 
     return (

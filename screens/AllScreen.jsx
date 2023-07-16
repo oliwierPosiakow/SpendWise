@@ -8,7 +8,7 @@ function AllScreen(props) {
     const expensesStore = useSelector(state => state.expenses.expenses)
 
     return (
-        <ExpensesOverview expenses={expensesStore} period={'Total'}/>
+        <ExpensesOverview expenses={expensesStore} period={'Total'} fallback={'No expenses found.'}/>
     );
 }
 

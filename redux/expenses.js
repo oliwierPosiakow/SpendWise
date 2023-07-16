@@ -1,5 +1,4 @@
 import {createSlice} from "@reduxjs/toolkit";
-import {dummy} from "../constants/DUMMY";
 
 const expensesSlice = createSlice({
     name: 'expenses',

@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, TextInput, StyleSheet} from "react-native";
+import {StyleSheet, Text, TextInput, View} from "react-native";
 import {COLORS} from "../../constants/COLORS";
 
 function Input({labelText, inputConfig, style, isValid}) {

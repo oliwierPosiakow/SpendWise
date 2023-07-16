@@ -24,7 +24,7 @@ function ExpensesOverview(){
             headerStyle: {backgroundColor: COLORS.primary},
             headerTintColor: COLORS.secondary,
             tabBarStyle: {backgroundColor: COLORS.primary},
-            tabBarActiveTintColor: COLORS.accent2,
+            tabBarActiveTintColor: COLORS.accent1,
             headerRight: ({tintColor}) => (
                 <IconButton
                     name={'add-to-list'}
