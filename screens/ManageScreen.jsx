@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {addExpense, removeExpense, updateExpense} from "../redux/expenses";
 
 import ExpenseForm from "../components/Expenses/ExpenseForm";
+import {storeDBExpense, putDBExpense, deleteDBExpense} from "../util/http";
 function ManageScreen({route, navigation}) {
 
     const expenseId = route.params?.expenseId
@@ -22,13 +23,16 @@ function ManageScreen({route, navigation}) {
         })
     },[navigation, isEditing])
 
-    function deleteExpense() {
+    async function deleteExpense() {
         dispatch(removeExpense({id: expenseId}))
+        await deleteDBExpense(expenseId)
         navigation.goBack()
     }
-    function addExpenseHandler(expenseData){
+    async function addExpenseHandler(expenseData){
         if(!isEditing){
+            const id = await storeDBExpense(expenseData)
             dispatch(addExpense({
+                id: id,
                 expenseData: {...expenseData}
             }))
         }
@@ -37,6 +41,7 @@ function ManageScreen({route, navigation}) {
                 id: expenseId,
                 expenseData: {...expenseData}
             }))
+            await putDBExpense(expenseId,expenseData)
         }
         navigation.goBack()
     }
