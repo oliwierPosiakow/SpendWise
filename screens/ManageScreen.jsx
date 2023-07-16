@@ -3,7 +3,7 @@ import {Text, View, StyleSheet, TextInput} from "react-native";
 import IconButton from "../UI/IconButton";
 import {COLORS} from "../constants/COLORS";
 import Button from "../UI/Button";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {addExpense, removeExpense, updateExpense} from "../redux/expenses";
 
 import ExpenseForm from "../components/Expenses/ExpenseForm";
@@ -11,6 +11,8 @@ function ManageScreen({route, navigation}) {
 
     const expenseId = route.params?.expenseId
     const isEditing = !!expenseId
+
+    const activeExpense = useSelector(state => state.expenses.expenses).find(expense => expense.id === expenseId)
 
     const dispatch = useDispatch()
 
@@ -44,7 +46,7 @@ function ManageScreen({route, navigation}) {
 
     return (
         <View style={styles.manageContainer}>
-            <ExpenseForm onSubmit={addExpenseHandler} onCancel={cancelHandler} submitButtonLabel={isEditing? 'Update' : 'Add'}/>
+            <ExpenseForm onSubmit={addExpenseHandler} onCancel={cancelHandler} submitButtonLabel={isEditing? 'Update' : 'Add'} defaultValues={activeExpense}/>
             {isEditing && (
                 <View style={styles.deleteBtn}>
                     <IconButton name={'trash'} color={COLORS.accent2} size={30} onPress={deleteExpense}/>
