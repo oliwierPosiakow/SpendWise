@@ -6,3 +6,11 @@ Spend Wise is a mobile app built using React Native and Native Navigation that h
 - Expense Tracking: Easily add and manage your expenses with detailed information such as amount, date, and descritpion.
 - Budget Management: Get precise insight about your spending alongside summaries in each category.
 - Fully editable: Edit, Delete and Add your expenses inside the app.
+
+## Stack
+
+- React Native
+- Routing (Stack and Tabs)
+- React 18
+- Redux Toolkit
+- Firebase
